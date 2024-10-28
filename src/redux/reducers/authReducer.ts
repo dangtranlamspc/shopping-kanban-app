@@ -25,11 +25,11 @@ const authSlice = createSlice({
     reducers : {
         addAuth : (state, action) => {
             state.data = action.payload
-            syncLocal(action.payload);
+            // syncLocal(action.payload);
         },
         removeAuth : (state, _actione) => {
             state.data = initialState;
-            syncLocal({});
+            // syncLocal({});
         },
         refreshToken : (state, action) => {
             state.data.token = action.payload
@@ -42,6 +42,6 @@ export const {addAuth, removeAuth, refreshToken} = authSlice.actions
 
 export const authSelector = (state : any) => state.authReducer.data;
 
-const syncLocal = (data : any) => {
-    localStorage.setItem(localDataNames.authData, JSON.stringify(data))
-}
+// const syncLocal = (data : any) => {
+//     localStorage.setItem(localDataNames.authData, JSON.stringify(data))
+// }
