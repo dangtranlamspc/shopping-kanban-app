@@ -1,34 +1,24 @@
 import axios from "axios";
 import queryString from "query-string";
-import { localDataNames } from "../../constants/appInfors";
 
-const baseURL = `http://192.168.102.200:3001`;
-const baseURLProduction = `https://serverkanban.onrender.com`;
-
-
-const getAccessToken = () => {
-    const res = localStorage.getItem(localDataNames.authData)
-
-    return res ? JSON.parse(res).token : '';
-}
+const baseURL = `http://192.168.102.142:3001`;
 
 const axiosClient = axios.create({
-    // baseURL : baseURL,
-    baseURL : baseURLProduction,
+    baseURL,
     paramsSerializer : (params) => queryString.stringify(params),
 });
 
 axiosClient.interceptors.request.use(async (config : any) => {
 
-    const accesstoken = getAccessToken()
+    const accesstoken = ''
 
     config.headers = {
         Authorization: `jiadji ${accesstoken}`,
         Accept : 'application/json',
         ...config.headers,
     }
-    return { ...config, data: config.data ?? null };;
-})
+    return { ...config, data: config.data ?? null };
+});
 
 axiosClient.interceptors.response.use(
     (res) => {
